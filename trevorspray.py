@@ -6,6 +6,7 @@ import sys
 import time
 import logging
 import argparse
+from random import randint
 from lib import util
 from lib import logger
 from time import sleep
@@ -57,9 +58,10 @@ def main(options):
 
             for i,result in enumerate(sprayer.spray()):
                 print(f'       Sprayed {i+1:,} accounts\r', end='', flush=True)
+                randomtimer = randint(3,11) #Added fixed Random between 3-11 as i'm in hurry :D
                 if options.verbose and options.delay > 0:
-                    log.debug(f'Sleeping for {options.delay:,} seconds')
-                sleep(options.delay)
+                    log.debug(f'Sleeping for {randomtimer:,} seconds')
+                sleep(randomtimer)
 
             log.info(f'Finished spraying {len(options.emails):,} users against {options.url} at {time.ctime()}')
             for success in sprayer.valid_logins:
